@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Switchback Creative Boilerplate Starter`,
@@ -27,6 +31,17 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`,
       },
     },
+    {
+      resolve: "gatsby-source-wordpress",
+      options: {
+        baseUrl: process.env.GATSBY_URL,
+        protocol: process.env.GATSBY_PROTOCOL,
+        hostingWPCOM: false,
+        useACF: true,
+        includedRoutes: ["**/posts", "**/media", "**/pages"],
+      },
+    },
+    `gatsby-plugin-styled-components`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
